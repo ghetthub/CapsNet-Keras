@@ -1,18 +1,18 @@
 """
 Keras implementation of CapsNet in Hinton's paper Dynamic Routing Between Capsules.
 The current version maybe only works for TensorFlow backend. Actually it will be straightforward to re-write to TF code.
-Adopting to other backends should be easy, but I have not tested this. 
+Adopting to other backends should be easy, but I have not tested this.
 
 Usage:
        python capsulenet.py
        python capsulenet.py --epochs 50
        python capsulenet.py --epochs 50 --routings 3
        ... ...
-       
+
 Result:
     Validation accuracy > 99.5% after 20 epochs. Converge to 99.66% after 50 epochs.
     About 110 seconds per epoch on a single GTX1070 GPU card
-    
+
 Author: Xifeng Guo, E-mail: `guoxifeng1990@163.com`, Github: `https://github.com/XifengGuo/CapsNet-Keras`
 """
 
@@ -20,6 +20,8 @@ import numpy as np
 from keras import layers, models, optimizers
 from keras import backend as K
 from keras.utils import to_categorical
+from keras.preprocessing.image import ImageDataGenerator
+from keras import callbacks
 import matplotlib.pyplot as plt
 from utils import combine_images
 from PIL import Image
@@ -203,8 +205,6 @@ def load_mnist():
 if __name__ == "__main__":
     import os
     import argparse
-    from keras.preprocessing.image import ImageDataGenerator
-    from keras import callbacks
 
     # setting the hyper parameters
     parser = argparse.ArgumentParser(description="Capsule Network on MNIST.")
