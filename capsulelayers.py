@@ -153,7 +153,8 @@ class CapsuleLayer(layers.Layer):
         
         # The prior for coupling coefficient, initialized as zeros.
         # b.shape = [None, self.num_capsule, self.input_num_capsule].
-        b = tf.zeros(shape=[K.shape(inputs_hat)[0], self.num_capsule, self.input_num_capsule])
+        # b = tf.zeros(shape=[K.shape(inputs_hat)[0], self.num_capsule, self.input_num_capsule])
+        b = K.stop_gradient(K.sum(K.zeros_like(inputs_hat), -1))
 
         assert self.routings > 0, 'The routings should be > 0.'
         for i in range(self.routings):
